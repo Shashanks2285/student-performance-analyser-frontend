@@ -1,0 +1,138 @@
+
+
+/* Host sets up the container */
+:host {
+  display: block;
+  height: 100vh;
+  width: 100vw;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* Each section takes full screen height for scrolling */
+.section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Background images per section */
+.section1 {
+  background-image: url('../../assets/bg1.jpg');
+}
+.section2 {
+  background-image: url('../../assets/bg2.jpg');
+}
+.section3 {
+  background-image: url('../../assets/bg3.jpg');
+}
+
+.section1, .section2, .section3 {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.section1::before,
+.section2::before,
+.section3::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Tint layer */
+  z-index: 0;
+}
+
+/* Elegant content box */
+.content {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 20px;
+  padding: 3rem 4rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  animation: fadeInUp 1s ease-out;
+}
+
+/* Headings */
+.content h1, .content h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
+  margin-bottom: 1.2rem;
+}
+
+/* Paragraphs */
+.content p {
+  font-size: 1.2rem;
+  color: #e0e0e0;
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+/* Button styling */
+.predict-btn {
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.6rem;
+  background-color: #00adb5;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.predict-btn:hover {
+  background-color: #007d82;
+}
+
+/* Form overlay and popup */
+.form-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+  z-index: 10;
+}
+.form-overlay.active {
+  display: block;
+}
+
+.form-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  z-index: 11;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+.form-popup.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

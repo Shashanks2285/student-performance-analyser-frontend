@@ -1,59 +1,180 @@
-# StudentPredictor
+# 🎓 Student Performance Predictor
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.6.
+An AI-powered web application that predicts a student's math score based on demographic information and academic performance using a machine learning model.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🧰 Tech Stack
+
+- **Frontend**: Angular (TypeScript)
+- **Backend**: Flask (Python)
+- **Model**: Linear Regression (Trained using scikit-learn)
+
+---
+
+## 📌 Features
+
+- 🔮 Predict student performance using machine learning
+- 🧾 Input form to collect demographic and academic data
+- 💡 Modal popup to show prediction result clearly
+- 🖼️ Responsive and styled UI
+- 💻 Integrated frontend and backend communication
+
+---
+
+## 🧠 ML Model Details
+
+- **Algorithm**: Linear Regression
+- **Trained On**: Student performance dataset
+- **Inputs**:
+  - Gender
+  - Ethnicity
+  - Parental Level of Education
+  - Lunch Type
+  - Test Preparation Course
+  - Reading Score
+  - Writing Score
+- **Output**: Predicted Math Score
+- **Tools Used**: scikit-learn, pandas, pickle
+
+---
+
+## 🏁 How to Run This Project Locally
+
+### 🔹 1. Clone the Repository
 
 ```bash
+git clone https://github.com/your-username/student-performance-predictor.git
+cd student-performance-predictor
+```
+
+### 🔹 2. Setup & Run Flask Backend
+
+```bash
+cd backend
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+python app.py
+```
+
+✅ Flask will start at: `http://localhost:5000`
+
+### 🔹 3. Setup & Run Angular Frontend
+
+```bash
+cd frontend
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+✅ Angular app will start at: `http://localhost:4200`
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 📡 API Details
 
-```bash
-ng generate component component-name
+### 🔸 Endpoint
+
+**POST** `/predict` → Full URL: `http://localhost:5000/predict`
+
+### 🔸 Request Example
+
+```json
+{
+  "gender": "Male",
+  "ethnicity": "Group A",
+  "parental_education": "Some College",
+  "lunch": "Standard",
+  "test_preparation": "Completed",
+  "reading_score": 68,
+  "writing_score": 42
+}
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### 🔸 Response Example
 
-```bash
-ng generate --help
+```json
+{
+  "predicted_score": 53.44
+}
 ```
 
-## Building
+---
 
-To build the project run:
+## 💡 UI Preview
 
-```bash
-ng build
+Add real screenshots in your repository in `frontend/src/assets/screenshots/` and link them below.
+
+| User Input Form | Prediction Modal |
+|----------------|------------------|
+| [Screenshot 1] | [Screenshot 2]   |
+
+---
+
+## 📁 File Structure (Simplified)
+
+```
+student-performance-predictor/
+├── backend/
+│   ├── app.py
+│   ├── model.pkl
+│   └── requirements.txt
+├── frontend/
+│   ├── src/
+│   │   ├── app/
+│   │   │   └── student-form/
+│   │   └── assets/screenshots/
+│   └── angular.json
+└── README.md
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+## 📦 Sample `requirements.txt` (Backend)
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+```
+Flask==2.3.2
+scikit-learn==1.3.0
+pandas==2.0.3
+numpy==1.25.2
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## 🛠️ Sample `app.py` (Backend)
 
-```bash
-ng e2e
+```python
+from flask import Flask, request, jsonify
+import pickle
+import numpy as np
+
+app = Flask(__name__)
+model = pickle.load(open('model.pkl', 'rb'))
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    data = request.json
+    input_data = [
+        data['gender'],
+        data['ethnicity'],
+        data['parental_education'],
+        data['lunch'],
+        data['test_preparation'],
+        data['reading_score'],
+        data['writing_score']
+    ]
+    # Encode categorical features and format input for model here
+    # For example only (not functional without preprocessing):
+    prediction = model.predict([input_data])[0]
+    return jsonify({'predicted_score': round(prediction, 2)})
+
+if __name__ == '__main__':
+    app.run(debug=True)
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## 🤝 Contributing
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Pull requests are welcome! Please open an issue first to discuss what you'd like to change.

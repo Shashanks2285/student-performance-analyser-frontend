@@ -1,0 +1,27 @@
+<div class="section section1">
+  <div class="content">
+    <h1>Welcome to Student Performance Analyzer</h1>
+    <p>Analyze and understand student performance using machine learning and data insights.</p>
+  </div>
+</div>
+
+<div class="section section2">
+  <div class="content">
+    <h2>How it Works</h2>
+    <p>We use Python and Pandas to analyze student data like gender, ethnicity, scores, etc.</p>
+  </div>
+</div>
+
+<div class="section section3">
+  <div class="content">
+    <h2>Get Started</h2>
+    <p>Provide basic details to predict your performance insights!</p>
+    <button class="predict-btn" (click)="showForm = true">Predict</button>
+  </div>
+</div>
+
+<div class="form-overlay" [class.active]="showForm" (click)="showForm = false"></div>
+
+<div class="form-popup" [class.active]="showForm">
+  <app-form></app-form>
+</div>

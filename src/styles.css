@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global Scrollbar Hide */
+body, html {
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  body::-webkit-scrollbar {
+    display: none;
+  }
