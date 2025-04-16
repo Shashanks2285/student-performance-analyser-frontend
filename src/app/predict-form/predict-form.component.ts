@@ -27,7 +27,7 @@ export class PredictFormComponent {
   constructor(private http: HttpClient) {}
 
   onSubmit() {
-    this.http.post<any>('http://13.201.23.154:5000/api', this.formData).subscribe({
+    this.http.post<any>('http://13.232.210.5:5000/api', this.formData).subscribe({
       next: (res) => {
         this.prediction = `Your predicted marks is: ${res.prediction}`;
         this.showModal = true;
